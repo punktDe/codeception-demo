@@ -1,0 +1,39 @@
+fe_users:
+  -
+    uid: 1
+    pid: 31
+    username: my_testuser
+    password: $P$CsCEXvqxy.bjX5ZqubdKfJkkiwPq5a0
+    email: non-existing@test.com
+    deleted: 0
+    first_name: Mitarbeiter
+    last_name: "All Access"
+    date_of_birth: 01.12.1976
+    gender: 1
+    usergroup: 1,100
+    tx_extbase_type: Tx_Extbase_Domain_Model_FrontendUser
+  -
+    uid: 2
+    pid: 31
+    username: special_testuser
+    password: $P$CsCEXvqxy.bjX5ZqubdKfJkkiwPq5a0
+    email: non-existing@test.com
+    deleted: 0
+    first_name: Spezialuser
+    last_name: "Default Access"
+    date_of_birth: 01.12.1976
+    gender: 1
+    usergroup: 1
+    tx_extbase_type: Tx_Extbase_Domain_Model_FrontendUser
+
+fe_groups:
+  -
+    uid: 1
+    pid: 31
+    title: "default usergrouo"
+    tx_extbase_type: Mittwald\Typo3Forum\Domain\Model\User\FrontendUserGroup
+  -
+    uid: 100
+    pid: 31
+    title: "all access"
+    tx_extbase_type: Mittwald\Typo3Forum\Domain\Model\User\FrontendUserGroup

@@ -1,0 +1,17 @@
+{
+    "name": "punktde/punktde-website-testing",
+    "license": "GPL3+",
+    "require": {
+        "codeception/codeception": "^3.0",
+        "punktde/codeception-webdriver": "^1.0",
+        "punktde/codeception-cli": "^1.0",
+        "punktde/codeception-mailhog": "^1.0",
+        "punktde/codeception-database": "^1.0",
+        "punktde/codeception-filesystem": "^1.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "PunktDe\\Ptw\\Monitoring\\": "Classes/"
+        }
+    }
+}

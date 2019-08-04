@@ -1,0 +1,29 @@
+stages:
+  - monitoring
+
+production:
+  stage: monitoring
+  image: php:7.2-alpine
+  tags:
+    - docker
+  before_script:
+    - mkdir -p "$APK_CACHE_DIR" "$COMPOSER_CACHE_DIR"
+    - apk add --no-cache libzip-dev && docker-php-ext-configure zip --with-libzip=/usr/include && docker-php-ext-install zip
+    - apk --cache-dir="$APK_CACHE_DIR" add openssh-client git composer rsync
+    - apk --cache-dir="$APK_CACHE_DIR" add chromium chromium-chromedriver
+    - composer install
+  script:
+    - chromedriver --url-base=/wd/hub --port=4444 & ./vendor/bin/codecept -c codeception.monitoring.yaml --steps run monitoring && killall chromedriver
+  variables:
+    APK_CACHE_DIR: "${CI_PROJECT_DIR}/.cache/apk"
+    COMPOSER_CACHE_DIR: "${CI_PROJECT_DIR}/.cache/composer"
+  cache:
+    paths:
+      - .cache
+  artifacts:
+    paths:
+      - Monitoring/_output/
+    when: always
+    expire_in: 1 week
+  only:
+    - master

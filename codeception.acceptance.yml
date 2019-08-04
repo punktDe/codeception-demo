@@ -1,0 +1,47 @@
+suites:
+  acceptance:
+    actor: MonitoringTester
+    path: .
+    modules:
+      enabled:
+        - WebDriver:
+            url: 'http://acceptance.dev.punkt.de/'
+            browser: chrome
+            restart: true
+            window_size: 1920x2080
+            capabilities:
+              chromeOptions:
+                args:
+                  - '--headless'
+                  - '--disable-gpu'
+                  - '--disable-dev-shm-usage'
+                  - '--no-sandbox'
+        - \Helper\Monitoring
+        - \PunktDe\Codeception\Filesystem\Module\Filesystem
+        - \PunktDe\Codeception\Filesystem\Module\Mailhog
+        - \PunktDe\Codeception\Filesystem\Module\Database:
+            dsn: 'mysql:host=acceptance.dev.punkt.de;dbname=pt_test'
+            user: 'pt_test'
+            password: 'pt_test_password'
+            dump: Acceptance/_data/fixture.sql
+            populate: true
+            cleanup: true
+            populator: 'mysql -u $user -h $host -p$password $dbname < $dump'
+        - Cli
+
+params:
+  - env
+
+extensions:
+  enabled:
+    - Codeception\Extension\RunFailed
+gherkin: []
+paths:
+  tests: Acceptance/Features
+  output: Acceptance/_output
+  data: Acceptance/_data
+  support: Acceptance/_support
+  envs: Acceptance/_envs
+settings:
+  shuffle: false
+  lint: true

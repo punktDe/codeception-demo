@@ -1,0 +1,35 @@
+suites:
+  monitoring:
+    actor: MonitoringTester
+    path: .
+    modules:
+      enabled:
+        - WebDriver:
+            url: 'https://www.punkt.de/'
+            browser: chrome
+            restart: true
+            window_size: 1920x2080
+            capabilities:
+              chromeOptions:
+                args:
+                  - '--headless'
+                  - '--disable-gpu'
+                  - '--disable-dev-shm-usage'
+                  - '--no-sandbox'
+        - \Helper\Monitoring
+        - \PunktDe\Codeception\Filesystem\Module\Filesystem
+
+
+extensions:
+  enabled:
+    - Codeception\Extension\RunFailed
+gherkin: []
+paths:
+  tests: Monitoring/Features
+  output: Monitoring/_output
+  data: Monitoring/_data
+  support: Monitoring/_support
+  envs: Monitoring/_envs
+settings:
+  shuffle: false
+  lint: true
