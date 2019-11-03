@@ -1,9 +1,10 @@
 suites:
   acceptance:
-    actor: MonitoringTester
+    actor: AcceptanceTester
     path: .
     modules:
       enabled:
+        - \Helper\Acceptance
         - WebDriver:
             url: 'http://acceptance.dev.punkt.de/'
             browser: chrome
@@ -16,10 +17,9 @@ suites:
                   - '--disable-gpu'
                   - '--disable-dev-shm-usage'
                   - '--no-sandbox'
-        - \Helper\Monitoring
         - \PunktDe\Codeception\Filesystem\Module\Filesystem
-        - \PunktDe\Codeception\Filesystem\Module\Mailhog
-        - \PunktDe\Codeception\Filesystem\Module\Database:
+        - \PunktDe\Codeception\Mailhog\Module\Mailhog
+        - \PunktDe\Codeception\Database\Module\Database:
             dsn: 'mysql:host=acceptance.dev.punkt.de;dbname=pt_test'
             user: 'pt_test'
             password: 'pt_test_password'
